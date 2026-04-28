@@ -1,4 +1,4 @@
-import { Music2, Phone } from "lucide-react";
+import { Phone, PhoneCall } from "lucide-react";
 import { Header } from "@/components/home/Header";
 
 export function Hero() {
@@ -34,7 +34,7 @@ export function Hero() {
         </h1>
       </div>
 
-      <div className="absolute bottom-7 right-7 z-20 flex flex-col items-center gap-8">
+      <div className="fixed bottom-7 right-7 z-50 flex flex-col items-center gap-8">
         <a
           aria-label="WhatsApp"
           href="https://wa.me/"
@@ -42,12 +42,13 @@ export function Hero() {
         >
           <Phone size={34} strokeWidth={3.4} fill="currentColor" />
         </a>
-        <button
-          aria-label="Music"
+        <a
+          aria-label="Phone"
+          href="tel:+1234567890"
           className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition hover:scale-105"
         >
-          <Music2 size={34} strokeWidth={3.2} />
-        </button>
+          <PhoneCall size={34} strokeWidth={3.2} />
+        </a>
       </div>
     </section>
   );
