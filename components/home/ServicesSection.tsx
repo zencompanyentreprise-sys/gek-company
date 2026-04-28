@@ -120,12 +120,17 @@ export function ServicesSection() {
         );
 
         cardRefs.current.forEach((card, index) => {
+          const isFirstCard = index === 0;
+
           gsap.fromTo(
             card,
-            { y: index % 2 === 0 ? 90 : -40, rotate: index % 2 === 0 ? 0 : -1 },
             {
-              y: index % 2 === 0 ? -45 : 55,
-              rotate: index % 2 === 0 ? -1 : 0,
+              y: isFirstCard ? 0 : index % 2 === 0 ? 36 : -28,
+              rotate: isFirstCard ? 0 : index % 2 === 0 ? 0 : -1,
+            },
+            {
+              y: isFirstCard ? -24 : index % 2 === 0 ? -28 : 34,
+              rotate: isFirstCard ? 0 : index % 2 === 0 ? -1 : 0,
               ease: "none",
               scrollTrigger: {
                 trigger: section,
@@ -171,7 +176,7 @@ export function ServicesSection() {
         ref={panelRef}
         className="relative min-h-screen overflow-hidden bg-inherit"
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 select-none text-center text-[clamp(4.4rem,13vw,17rem)] font-black uppercase leading-[0.78] text-black/[0.045]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 hidden select-none text-center text-[clamp(4.4rem,13vw,17rem)] font-black uppercase leading-[0.78] text-black/[0.045] sm:block">
           Servicios
         </div>
         <div className="pointer-events-none absolute left-1/2 top-[19%] hidden -translate-x-1/2 select-none whitespace-nowrap text-[clamp(4rem,10vw,12rem)] font-black uppercase leading-none text-black/[0.04] lg:block">
@@ -203,7 +208,7 @@ export function ServicesSection() {
                       cardRefs.current[index] = node;
                     }
                   }}
-                  className="relative min-h-[345px] overflow-hidden rounded-[16px] bg-brand-black text-white shadow-[0_18px_50px_rgba(0,0,0,0.14)] lg:h-[390px] lg:w-[560px] lg:shrink-0"
+                  className="relative min-h-[345px] overflow-hidden rounded-[16px] bg-brand-black text-white lg:h-[390px] lg:w-[560px] lg:shrink-0"
                 >
                   <div className={`absolute inset-0 ${service.tone}`} />
                   <div className="absolute inset-y-0 right-0 w-[64%] [clip-path:polygon(20%_0,100%_0,100%_100%,0_100%,28%_50%)]">
