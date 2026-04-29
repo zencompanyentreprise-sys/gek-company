@@ -5,7 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Menu, X } from "lucide-react";
 
-const menuItems = ["Inicio", "Servicios", "Nosotros", "Proyectos", "Contacto"];
+const menuItems = [
+  "Inicio",
+  "Servicios",
+  "Productos",
+  "Nosotros",
+  "Proyectos",
+  "Contacto",
+];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,7 +70,7 @@ export function Header() {
 
           <div
             id="main-menu"
-            className={`fixed inset-0 z-[60] flex flex-col justify-between bg-primary px-6 py-24 text-brand-black transition duration-300 sm:px-10 sm:py-28 lg:px-16 lg:py-16 ${
+            className={`fixed inset-0 z-[60] flex flex-col justify-between overflow-y-auto bg-primary px-5 py-18 text-brand-black transition duration-300 sm:px-10 sm:py-20 lg:px-16 lg:py-14 ${
               isMenuOpen
                 ? "pointer-events-auto translate-y-0 opacity-100"
                 : "pointer-events-none translate-y-3 opacity-0"
@@ -73,13 +80,13 @@ export function Header() {
               type="button"
               aria-label="Cerrar menu"
               onClick={() => setIsMenuOpen(false)}
-              className="absolute right-4 top-4 z-[70] flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-black text-white shadow-lg transition hover:bg-white hover:text-brand-black sm:right-9 sm:top-9 sm:h-[76px] sm:w-[76px] lg:right-14 lg:top-14"
+              className="absolute right-4 top-4 z-[70] flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-black text-white shadow-lg transition hover:bg-white hover:text-brand-black sm:right-9 sm:top-6 sm:h-16 sm:w-16 lg:right-14 lg:top-10 lg:h-[76px] lg:w-[76px]"
             >
               <X className="h-6 w-6 sm:h-9 sm:w-9" strokeWidth={3} />
             </button>
 
-            <div className="mt-8 max-w-[980px] sm:mt-16 lg:mt-24">
-              <p className="mb-5 text-sm font-black uppercase tracking-[0.28em] text-brand-black/55">
+            <div className="mt-10 max-w-[980px] sm:mt-12 lg:mt-16">
+              <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-brand-black/55 sm:mb-4 sm:text-sm">
                 Menu
               </p>
               <nav className="flex flex-col">
@@ -88,11 +95,11 @@ export function Header() {
                     key={item}
                     href="#"
                     onClick={() => setIsMenuOpen(false)}
-                    className="group/link flex items-center justify-between border-t border-brand-black/20 py-4 text-[clamp(2.5rem,8vw,7rem)] font-black uppercase leading-[0.9] transition hover:pl-3 hover:text-white sm:py-5"
+                    className="group/link flex items-center justify-between border-t border-brand-black/20 py-3 text-[clamp(2.05rem,10vw,4.6rem)] font-black uppercase leading-[0.88] transition hover:pl-3 hover:text-white sm:py-3.5 sm:text-[clamp(2.4rem,7vw,5.6rem)] lg:py-4 lg:text-[clamp(2.8rem,5.8vw,6.2rem)]"
                   >
                     {item}
                     <ArrowUpRight
-                      className="h-8 w-8 shrink-0 opacity-45 transition group-hover/link:translate-x-1 group-hover/link:-translate-y-1 group-hover/link:opacity-100 sm:h-12 sm:w-12"
+                      className="h-7 w-7 shrink-0 opacity-45 transition group-hover/link:translate-x-1 group-hover/link:-translate-y-1 group-hover/link:opacity-100 sm:h-10 sm:w-10 lg:h-12 lg:w-12"
                       strokeWidth={3}
                     />
                   </a>
@@ -100,7 +107,7 @@ export function Header() {
               </nav>
             </div>
 
-            <div className="flex flex-wrap gap-3 text-sm font-black uppercase tracking-[0.18em] text-brand-black/70">
+            <div className="mt-8 flex flex-wrap gap-2 text-xs font-black uppercase tracking-[0.16em] text-brand-black/70 sm:gap-3 sm:text-sm">
               <span>Software</span>
               <span>Consultoria</span>
               <span>SaaS B2B</span>
