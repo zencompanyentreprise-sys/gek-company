@@ -183,19 +183,22 @@ export function ServicesSection() {
           Software
         </div>
 
-        <div className="services-copy relative z-10 mx-auto flex min-h-[330px] max-w-[1780px] flex-col justify-end gap-8 px-6 pb-10 pt-24 sm:px-10 lg:grid lg:min-h-[42vh] lg:grid-cols-[1fr_1.05fr] lg:items-end lg:px-14 lg:pb-0">
-          <h2 className="max-w-[790px] text-[clamp(2.35rem,5vw,5.6rem)] font-black uppercase leading-[0.88] text-brand-black">
+        <div className="services-copy relative z-10 mx-auto flex min-h-[280px] max-w-[1780px] flex-col justify-end gap-5 px-4 pb-8 pt-20 sm:min-h-[330px] sm:gap-8 sm:px-10 sm:pb-10 sm:pt-24 lg:grid lg:min-h-[42vh] lg:grid-cols-[1fr_1.05fr] lg:items-end lg:px-14 lg:pb-0">
+          <p className="w-max rounded-full bg-brand-black px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white sm:hidden">
+            Servicios
+          </p>
+          <h2 className="max-w-[790px] text-[clamp(2.15rem,11vw,5.6rem)] font-black uppercase leading-[0.9] text-brand-black sm:text-[clamp(2.35rem,5vw,5.6rem)] sm:leading-[0.88]">
             Servicios para construir productos digitales serios.
           </h2>
-          <p className="max-w-[790px] text-left text-[clamp(1.7rem,3.2vw,4.2rem)] font-black uppercase leading-[0.9] text-brand-black lg:justify-self-end lg:text-right">
+          <p className="max-w-[790px] text-left text-xl font-black uppercase leading-[1] text-brand-black sm:text-[clamp(1.7rem,3.2vw,4.2rem)] sm:leading-[0.9] lg:justify-self-end lg:text-right">
             B2B, SaaS, sistemas, consultoria y crecimiento continuo.
           </p>
         </div>
 
-        <div className="relative z-10 mx-auto max-w-[1780px] px-6 pb-16 sm:px-10 lg:max-w-none lg:px-14 lg:pb-20">
+        <div className="relative z-10 mx-auto max-w-[1780px] px-4 pb-14 sm:px-10 sm:pb-16 lg:max-w-none lg:px-14 lg:pb-20">
           <div
             ref={trackRef}
-            className="grid gap-7 lg:flex lg:w-max lg:gap-9"
+            className="grid gap-4 sm:gap-7 lg:flex lg:w-max lg:gap-9"
           >
             {services.map((service, index) => {
               const Icon = service.icon;
@@ -208,10 +211,10 @@ export function ServicesSection() {
                       cardRefs.current[index] = node;
                     }
                   }}
-                  className="relative min-h-[345px] overflow-hidden rounded-[16px] bg-brand-black text-white lg:h-[390px] lg:w-[560px] lg:shrink-0"
+                  className="relative min-h-[300px] overflow-hidden rounded-[8px] bg-brand-black text-white shadow-[0_18px_45px_rgba(0,0,0,0.16)] sm:min-h-[345px] lg:h-[390px] lg:w-[560px] lg:shrink-0 lg:rounded-[16px]"
                 >
                   <div className={`absolute inset-0 ${service.tone}`} />
-                  <div className="absolute inset-y-0 right-0 w-[64%] [clip-path:polygon(20%_0,100%_0,100%_100%,0_100%,28%_50%)]">
+                  <div className="absolute inset-y-0 right-0 w-[62%] opacity-80 [clip-path:polygon(14%_0,100%_0,100%_100%,0_100%,22%_50%)] sm:w-[64%] sm:opacity-100 sm:[clip-path:polygon(20%_0,100%_0,100%_100%,0_100%,28%_50%)]">
                     <Image
                       src={service.image}
                       alt=""
@@ -220,17 +223,22 @@ export function ServicesSection() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.58)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0)_100%)] sm:bg-gradient-to-t sm:from-black/20 sm:via-transparent sm:to-transparent" />
+                  <span className="absolute right-4 top-4 z-10 text-sm font-black text-white/70 sm:hidden">
+                    0{index + 1}
+                  </span>
 
-                  <div className="relative z-10 flex h-full min-h-[345px] max-w-[62%] flex-col justify-end p-7 lg:min-h-[390px] lg:p-8">
-                    <Icon
-                      className="mb-7 h-12 w-12 text-white"
-                      strokeWidth={1.8}
-                    />
-                    <p className="mb-3 text-sm font-black uppercase tracking-[0.18em] text-white/75">
+                  <div className="relative z-10 flex h-full min-h-[300px] max-w-[76%] flex-col justify-end p-5 sm:min-h-[345px] sm:max-w-[62%] sm:p-7 lg:min-h-[390px] lg:p-8">
+                    <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/20 sm:mb-7 sm:h-auto sm:w-auto sm:justify-start sm:rounded-none sm:bg-transparent sm:ring-0">
+                      <Icon
+                        className="h-6 w-6 text-white sm:h-12 sm:w-12"
+                        strokeWidth={1.8}
+                      />
+                    </div>
+                    <p className="mb-2 text-xs font-black uppercase tracking-[0.18em] text-white/75 sm:mb-3 sm:text-sm">
                       {service.label}
                     </p>
-                    <h3 className="text-[clamp(1.65rem,1.9vw,2.25rem)] font-black leading-[0.94] tracking-normal">
+                    <h3 className="text-[clamp(1.55rem,7vw,2.05rem)] font-black leading-[0.96] tracking-normal sm:text-[clamp(1.65rem,1.9vw,2.25rem)] sm:leading-[0.94]">
                       {service.title}
                     </h3>
                   </div>

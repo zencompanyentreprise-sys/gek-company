@@ -41,7 +41,7 @@ export function AboutSection() {
                   className="flex items-center gap-2 whitespace-nowrap text-lg font-black"
                   aria-hidden={index >= partners.length}
                 >
-                  <Icon className="h-6 w-6" strokeWidth={2.4} />
+                  <Icon className="h-4 w-4 sm:h-6 sm:w-6" strokeWidth={2.4} />
                   <span>{partner.name}</span>
                 </div>
               );
