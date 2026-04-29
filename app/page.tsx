@@ -1,5 +1,6 @@
 import { AboutSection } from "@/components/home/AboutSection";
 import { Hero } from "@/components/home/Hero";
+import { ProductsSection } from "@/components/home/ProductsSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 
 export default function Home() {
@@ -8,8 +9,9 @@ export default function Home() {
       <div className="p-2 sm:p-6 lg:p-9">
         <Hero />
       </div>
-      <ServicesSection />
+      <ProductsSection />
       <AboutSection />
+      <ServicesSection />
     </main>
   );
 }
