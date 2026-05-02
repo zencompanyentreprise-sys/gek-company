@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowUp,
   ArrowUpRight,
   MessageCircle,
   Sparkles,
@@ -108,14 +107,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-
-      <a
-        href="#"
-        aria-label="Volver arriba"
-        className="fixed bottom-5 left-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-brand-black shadow-lg transition hover:bg-white"
-      >
-        <ArrowUp className="h-6 w-6" strokeWidth={3} />
-      </a>
 
       <a
         href="https://wa.me/"

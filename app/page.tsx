@@ -10,7 +10,6 @@ export default function Home() {
       <div className="p-2 sm:p-6 lg:p-9">
         <Hero />
       </div>
-      <ProductsSection />
       <AboutSection />
       <ServicesSection />
       <Footer />

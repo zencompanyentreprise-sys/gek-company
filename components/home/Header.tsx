@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Menu, X } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const menuItems = [
   "Inicio",
@@ -16,30 +20,129 @@ const menuItems = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const locationRef = useRef<HTMLButtonElement>(null);
+  const callUsRef = useRef<HTMLButtonElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const isHeaderHiddenRef = useRef(false);
+  const isMenuOpenRef = useRef(isMenuOpen);
+
+  useEffect(() => {
+    isMenuOpenRef.current = isMenuOpen;
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const animatedRefs: Array<HTMLElement | null> = [
+        logoRef.current,
+        locationRef.current,
+        callUsRef.current,
+        menuButtonRef.current,
+      ];
+      const animatedItems = animatedRefs.filter(
+        (item): item is HTMLElement => Boolean(item),
+      );
+
+      const showHeaderItems = () => {
+        if (!isHeaderHiddenRef.current) {
+          return;
+        }
+
+        isHeaderHiddenRef.current = false;
+        gsap.killTweensOf(animatedItems);
+        gsap.to(animatedItems, {
+          y: 0,
+          scale: 1,
+          autoAlpha: 1,
+          pointerEvents: "auto",
+          duration: 0.78,
+          stagger: {
+            each: 0.045,
+            from: "end",
+          },
+          ease: "expo.out",
+        });
+      };
+
+      const hideHeaderItems = () => {
+        if (isHeaderHiddenRef.current) {
+          return;
+        }
+
+        isHeaderHiddenRef.current = true;
+        gsap.killTweensOf(animatedItems);
+        gsap.to(animatedItems, {
+          y: -132,
+          scale: 0.985,
+          autoAlpha: 0,
+          pointerEvents: "none",
+          duration: 0.62,
+          stagger: {
+            each: 0.035,
+            from: "start",
+          },
+          ease: "expo.inOut",
+        });
+      };
+
+      const trigger = ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          if (isMenuOpenRef.current) {
+            return;
+          }
+
+          const scrollY = self.scroll();
+
+          if (scrollY < 36) {
+            showHeaderItems();
+            return;
+          }
+
+          if (scrollY > 86 && self.direction === 1) {
+            hideHeaderItems();
+          }
+
+          if (self.direction === -1) {
+            showHeaderItems();
+          }
+        },
+      });
+
+      return () => {
+        trigger.kill();
+      };
+    }, headerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-start justify-between px-4 py-4 sm:px-9 lg:px-14 lg:py-14">
+    <header
+      ref={headerRef}
+      className="fixed inset-x-0 top-0 z-50 flex items-start justify-between px-4 py-4 sm:px-9 lg:px-14 lg:py-14"
+    >
       <Link
+        ref={logoRef}
         href="/"
         aria-label="GEK home"
-        className="relative z-50 flex items-center gap-2 text-white transition hover:scale-[1.03] sm:gap-3"
+        className="relative z-50 flex items-center transition hover:scale-[1.03]"
       >
-        <div className="relative h-9 w-12 overflow-hidden sm:h-12 sm:w-16">
-          <Image
-            src="/gek-gecko-logo-transparent.png"
-            alt="Logo gecko de GEK"
-            fill
-            sizes="64px"
-            className="object-contain"
-          />
-        </div>
-        <span className="text-xl font-black leading-none tracking-[0.16em] sm:text-[34px]">
-          GEK
-        </span>
+        <Image
+          src="/home/logo.svg"
+          alt="GEK"
+          width={165}
+          height={89}
+          priority
+          className="h-auto w-[102px] sm:w-[140px] lg:w-[165px]"
+        />
       </Link>
 
       <div className="flex items-start gap-2 sm:gap-4 lg:gap-5">
         <button
+          ref={locationRef}
           aria-label="Location"
           className="hidden h-14 w-14 items-center justify-center rounded-[8px] bg-brand-black text-primary shadow-lg transition hover:scale-105 lg:flex lg:h-[76px] lg:w-[76px]"
         >
@@ -49,11 +152,15 @@ export function Header() {
             fill="currentColor"
           />
         </button>
-        <button className="flex h-12 min-w-28 items-center justify-center rounded-[8px] bg-primary px-5 text-base font-black tracking-[0.04em] text-white shadow-lg transition hover:bg-accent sm:h-[76px] sm:min-w-[170px] sm:px-8 sm:text-2xl">
+        <button
+          ref={callUsRef}
+          className="flex h-12 min-w-28 items-center justify-center rounded-[8px] bg-primary px-5 text-base font-black tracking-[0.04em] text-white shadow-lg transition hover:bg-accent sm:h-[76px] sm:min-w-[170px] sm:px-8 sm:text-2xl"
+        >
           CALL US
         </button>
         <div>
           <button
+            ref={menuButtonRef}
             type="button"
             aria-expanded={isMenuOpen}
             aria-controls="main-menu"
